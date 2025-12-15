@@ -56,20 +56,35 @@ class SystemUtils:
             else:
                 print("Please enter 'y' for yes or 'n' for no")
     
-    def run_powershell_command(self, command, bypass_policy=True, timeout=300):
+    def run_powershell_command(self, command, bypass_policy=True, timeout=300, interactive=False):
         """Execute a PowerShell command with optional execution policy bypass"""
         try:
-            ps_command = command
             if bypass_policy:
-                ps_command = f"-ExecutionPolicy Bypass -Command \"{command}\""
+                if interactive:
+                    ps_args = ["powershell", "-ExecutionPolicy", "Bypass", "-NoExit", "-WindowStyle", "Normal", "-Command", command]
+                else:
+                    ps_args = ["powershell", "-ExecutionPolicy", "Bypass", "-Command", command]
+            else:
+                if interactive:
+                    ps_args = ["powershell", "-NoExit", "-WindowStyle", "Normal", "-Command", command]
+                else:
+                    ps_args = ["powershell", "-Command", command]
             
             print(f" Executing: {command}")
-            result = subprocess.run(
-                ["powershell", ps_command],
-                capture_output=True,
-                text=True,
-                timeout=timeout
-            )
+            
+            if interactive:
+                # For interactive scripts, don't capture output to allow GUI to show
+                result = subprocess.run(
+                    ps_args,
+                    timeout=timeout
+                )
+            else:
+                result = subprocess.run(
+                    ps_args,
+                    capture_output=True,
+                    text=True,
+                    timeout=timeout
+                )
             
             if result.returncode == 0:
                 print("Command executed successfully")
@@ -91,14 +106,44 @@ class SystemUtils:
         """Execute a PowerShell script from URL"""
         print(f"\n{description}")
         print("=" * 50)
-        
+
         if not self.get_confirmation(f"Run {description}? This will execute PowerShell scripts from the internet."):
             print("Operation cancelled by user")
             return False
-        
-        command = f"[scriptblock]::Create((irm \"{script_url}\"))"
-        success, output = self.run_powershell_command(command)
-        return success
+
+        # Special handling for Windows Activation script which requires admin privileges
+        if "get.activated.win" in script_url:
+            # For Windows activation, use the proper command: irm https://get.activated.win | iex
+            command = f"irm {script_url} | iex"
+            print(f" Executing activation command: {command}")
+            print(" A new PowerShell window will open with the activation tool")
+
+            # Use the run_powershell_command method which handles the execution properly
+            success, output = self.run_powershell_command(command, bypass_policy=True, timeout=300, interactive=True)
+            return success
+        elif "win11debloat.raphi.re" in script_url:
+            # For Win11Debloat, use the proper command: & ([scriptblock]::Create((irm "https://win11debloat.raphi.re/")))
+            command = f"& ([scriptblock]::Create((irm \"{script_url}\")))"
+            print(f" Executing debloat command: {command}")
+            success, output = self.run_powershell_command(command, bypass_policy=True, timeout=300, interactive=True)
+            return success
+        elif "christitus.com/win" in script_url:
+            # For Windows tweaks, use the proper command: iwr -useb https://christitus.com/win | iex
+            command = f"iwr -useb {script_url} | iex"
+            print(f" Executing tweaks command: {command}")
+            success, output = self.run_powershell_command(command, bypass_policy=True, timeout=300, interactive=True)
+            return success
+        elif "git.io/debloat11" in script_url:
+            # For Debloat11, use the proper command: iwr https://git.io/debloat11|iex
+            command = f"iwr {script_url}|iex"
+            print(f" Executing debloat11 command: {command}")
+            success, output = self.run_powershell_command(command, bypass_policy=True, timeout=300, interactive=True)
+            return success
+        else:
+            # For other scripts, use the generic approach
+            command = f"[scriptblock]::Create((irm \"{script_url}\"))"
+            success, output = self.run_powershell_command(command, bypass_policy=True, timeout=300, interactive=True)
+            return success
     
     def run_command(self, command, shell=True, timeout=60):
         """Run a system command"""
