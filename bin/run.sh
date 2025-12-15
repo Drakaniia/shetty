@@ -2673,7 +2673,11 @@ main() {
 
     while true; do
         show_menu
-        read -p "Enter your choice [0-9]: " choice
+        echo -n "Enter your choice [0-7] (or press a number key): "
+
+        # Read a single character without requiring Enter
+        read -n 1 choice
+        echo  # Add a newline after the input
 
         case $choice in
             1)
