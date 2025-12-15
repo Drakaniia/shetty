@@ -209,16 +209,14 @@ class SystemUtils:
             return False, str(e)
     
     def check_program_exists(self, program_name):
-        """Check if a program is available in the system PATH
-
-        For Node.js, we'll try multiple variations since it might be installed differently
-        """
-        # Special handling for node.js detection to try multiple possible names/locations
+        """Check if a program is available in the system PATH"""
+        import os
+        
+        # Try to refresh the PATH environment variable to catch recently installed programs
+        os.environ.update(os.environ)
+        
+        # Special handling for Node.js and npm
         if program_name.lower() in ['node', 'nodejs']:
-            import os
-            # Try to refresh the PATH environment variable to catch recently installed programs
-            os.environ.update(os.environ)
-
             node_variants = ['node', 'nodejs', 'node.exe', 'nodejs.exe']
             for variant in node_variants:
                 try:
@@ -228,7 +226,7 @@ class SystemUtils:
                 except (subprocess.CalledProcessError, FileNotFoundError, subprocess.TimeoutExpired):
                     continue
 
-            # If standard checks fail, try to find Node.js in common installation directories
+            # Check common Node.js installation directories
             common_node_paths = [
                 r"C:\Program Files\nodejs\node.exe",
                 r"C:\Program Files (x86)\nodejs\node.exe",
@@ -244,7 +242,35 @@ class SystemUtils:
                     except (subprocess.CalledProcessError, subprocess.TimeoutExpired):
                         continue
 
-            return False  # None of the variants worked
+            return False
+            
+        elif program_name.lower() == 'npm':
+            npm_variants = ['npm', 'npm.cmd', 'npm.exe']
+            for variant in npm_variants:
+                try:
+                    result = subprocess.run([variant, "--version"],
+                                          capture_output=True, check=True, timeout=10)
+                    return True
+                except (subprocess.CalledProcessError, FileNotFoundError, subprocess.TimeoutExpired):
+                    continue
+
+            # Check npm in common Node.js installation directories
+            common_npm_paths = [
+                r"C:\Program Files\nodejs\npm.cmd",
+                r"C:\Program Files (x86)\nodejs\npm.cmd",
+                os.path.expanduser(r"~\AppData\Local\Programs\nodejs\npm.cmd")
+            ]
+
+            for path in common_npm_paths:
+                if os.path.exists(path):
+                    try:
+                        result = subprocess.run([path, "--version"],
+                                              capture_output=True, check=True, timeout=10)
+                        return True
+                    except (subprocess.CalledProcessError, subprocess.TimeoutExpired):
+                        continue
+
+            return False
         else:
             # For other programs, use the original method
             try:
