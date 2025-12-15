@@ -370,7 +370,9 @@ SCRIPTEND
         windows_path="${windows_path//\//\\}"
         echo "2. Navigate to the project directory"
         echo "   cd \"$windows_path\""
-        echo "3. Run: bash bin/run.sh"
+        echo "3. Run the script using one of these methods:"
+        echo "   Option A: If Git Bash is installed, run: \"C:\Program Files\Git\bin\bash.exe\" bin/run.sh"
+        echo "   Option B: Open Git Bash separately and navigate to this directory"
         return 1
     fi
 }
@@ -707,7 +709,9 @@ SCRIPTEND
         windows_path="${windows_path//\//\\}"
         echo "2. Navigate to the project directory"
         echo "   cd \"$windows_path\""
-        echo "3. Run: bash bin/run.sh"
+        echo "3. Run the script using one of these methods:"
+        echo "   Option A: If Git Bash is installed, run: \"C:\Program Files\Git\bin\bash.exe\" bin/run.sh"
+        echo "   Option B: Open Git Bash separately and navigate to this directory"
         return 1
     fi
 }
@@ -1272,7 +1276,9 @@ SCRIPTEND
         windows_path="${windows_path//\//\\}"
         echo "2. Navigate to the project directory"
         echo "   cd \"$windows_path\""
-        echo "3. Run: bash bin/run.sh"
+        echo "3. Run the script using one of these methods:"
+        echo "   Option A: If Git Bash is installed, run: \"C:\Program Files\Git\bin\bash.exe\" bin/run.sh"
+        echo "   Option B: Open Git Bash separately and navigate to this directory"
         return 1
     fi
 }
@@ -2619,7 +2625,9 @@ SCRIPTEND
         windows_path="${windows_path//\//\\}"
         echo "2. Navigate to the project directory"
         echo "   cd \"$windows_path\""
-        echo "3. Run: bash bin/run.sh"
+        echo "3. Run the script using one of these methods:"
+        echo "   Option A: If Git Bash is installed, run: \"C:\Program Files\Git\bin\bash.exe\" bin/run.sh"
+        echo "   Option B: Open Git Bash separately and navigate to this directory"
         return 1
     fi
 }
@@ -2700,7 +2708,9 @@ run_all_phases() {
         windows_path="${windows_path//\//\\}"
         echo "2. Navigate to the project directory"
         echo "   cd \"$windows_path\""
-        echo "3. Run: bash bin/run.sh"
+        echo "3. Run the script using one of these methods:"
+        echo "   Option A: If Git Bash is installed, run: \"C:\Program Files\Git\bin\bash.exe\" bin/run.sh"
+        echo "   Option B: Open Git Bash separately and navigate to this directory"
     fi
 
     # Phase 2: Power plan (requires admin)
@@ -2727,7 +2737,9 @@ run_all_phases() {
         windows_path="${windows_path//\//\\}"
         echo "2. Navigate to the project directory"
         echo "   cd \"$windows_path\""
-        echo "3. Run: bash bin/run.sh"
+        echo "3. Run the script using one of these methods:"
+        echo "   Option A: If Git Bash is installed, run: \"C:\Program Files\Git\bin\bash.exe\" bin/run.sh"
+        echo "   Option B: Open Git Bash separately and navigate to this directory"
     fi
 
     # Phase 3: Applications (requires admin for some apps)
@@ -2754,7 +2766,9 @@ run_all_phases() {
         windows_path="${windows_path//\//\\}"
         echo "2. Navigate to the project directory"
         echo "   cd \"$windows_path\""
-        echo "3. Run: bash bin/run.sh"
+        echo "3. Run the script using one of these methods:"
+        echo "   Option A: If Git Bash is installed, run: \"C:\Program Files\Git\bin\bash.exe\" bin/run.sh"
+        echo "   Option B: Open Git Bash separately and navigate to this directory"
     fi
 
     # Phase 4: CLI tools (can run without admin if Node.js available)
@@ -2787,7 +2801,9 @@ run_all_phases() {
         windows_path="${windows_path//\//\\}"
         echo "2. Navigate to the project directory"
         echo "   cd \"$windows_path\""
-        echo "3. Run: bash bin/run.sh"
+        echo "3. Run the script using one of these methods:"
+        echo "   Option A: If Git Bash is installed, run: \"C:\Program Files\Git\bin\bash.exe\" bin/run.sh"
+        echo "   Option B: Open Git Bash separately and navigate to this directory"
     fi
 
     show_completion_summary
@@ -2850,7 +2866,9 @@ main() {
                     windows_path="${windows_path//\//\\}"
                     echo "2. Navigate to the project directory"
                     echo "   cd \"$windows_path\""
-                    echo "3. Run: bash bin/run.sh"
+                    echo "3. Run the script using one of these methods:"
+                    echo "   Option A: If Git Bash is installed, run: \"C:\Program Files\Git\bin\bash.exe\" bin/run.sh"
+                    echo "   Option B: Open Git Bash separately and navigate to this directory"
                 else
                     debloat_selection
                 fi
@@ -2878,7 +2896,9 @@ main() {
                     windows_path="${windows_path//\//\\}"
                     echo "2. Navigate to the project directory"
                     echo "   cd \"$windows_path\""
-                    echo "3. Run: bash bin/run.sh"
+                    echo "3. Run the script using one of these methods:"
+                    echo "   Option A: If Git Bash is installed, run: \"C:\Program Files\Git\bin\bash.exe\" bin/run.sh"
+                    echo "   Option B: Open Git Bash separately and navigate to this directory"
                 else
                     setup_power_plan
                 fi
@@ -2906,7 +2926,9 @@ main() {
                     windows_path="${windows_path//\//\\}"
                     echo "2. Navigate to the project directory"
                     echo "   cd \"$windows_path\""
-                    echo "3. Run: bash bin/run.sh"
+                    echo "3. Run the script using one of these methods:"
+                    echo "   Option A: If Git Bash is installed, run: \"C:\Program Files\Git\bin\bash.exe\" bin/run.sh"
+                    echo "   Option B: Open Git Bash separately and navigate to this directory"
                 else
                     install_applications
                 fi
@@ -2942,7 +2964,9 @@ main() {
                     windows_path="${windows_path//\//\\}"
                     echo "2. Navigate to the project directory"
                     echo "   cd \"$windows_path\""
-                    echo "3. Run: bash bin/run.sh"
+                    echo "3. Run the script using one of these methods:"
+                    echo "   Option A: If Git Bash is installed, run: \"C:\Program Files\Git\bin\bash.exe\" bin/run.sh"
+                    echo "   Option B: Open Git Bash separately and navigate to this directory"
                 else
                     configure_system_settings
                 fi
