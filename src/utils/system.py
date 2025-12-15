@@ -116,8 +116,7 @@ class SystemUtils:
             print("Operation cancelled by user")
             return False
 
-        # For all interactive PowerShell scripts, use a different approach
-        # Create a temporary batch file that runs the PowerShell command with admin privileges
+        # For all PowerShell scripts, use a temporary file approach
         import tempfile
         import os
 
@@ -142,20 +141,18 @@ class SystemUtils:
             ps_command = f"[scriptblock]::Create((irm \"{script_url}\"))"
             print(f" Executing command: {ps_command}")
 
-        print(" A new PowerShell window will open with the script.")
-        print(" Close the PowerShell window when done to continue...")
+        print(" Running PowerShell command...")
 
         # Create a temporary PowerShell script to execute the command
         with tempfile.NamedTemporaryFile(mode='w', suffix='.ps1', delete=False) as temp_ps:
+            # Don't try to set execution policy since PowerShell is run with Bypass
             temp_ps.write(f"""
-# PowerShell script to run external PowerShell command
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
 {ps_command}
 """)
             temp_script_path = temp_ps.name
 
         try:
-            # Execute the temporary script with a direct PowerShell call that waits for completion
+            # Execute the temporary script with PowerShell Bypass policy
             ps_args = ["powershell", "-ExecutionPolicy", "Bypass", "-File", temp_script_path]
 
             # Run the command with real-time output
@@ -169,8 +166,8 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
             # Clean up the temporary file
             os.remove(temp_script_path)
 
-            # Report success regardless of actual return code since interactive scripts
-            # may exit with different codes but still be successful
+            # Report success regardless of return code since these scripts may exit with different codes
+            # but still be functionally successful
             print(f"\n {description} completed successfully")
             return True
 
