@@ -2567,7 +2567,34 @@ SCRIPTEND
 # Main menu function
 show_menu() {
     clear
-    cat << 'EOF'
+    # Calculate terminal width for centering
+    terminal_width=$(tput cols 2>/dev/null || echo 80)
+    menu_width=80
+    # Calculate left padding for centering
+    if [ $terminal_width -gt $menu_width ]; then
+        padding=$(((terminal_width - menu_width) / 2))
+        # Print empty lines for vertical centering (approximately)
+        for i in $(seq 1 10); do echo; done
+        # Print the menu with left padding
+        printf "%*s" $padding ""
+        echo '╔══════════════════════════════════════════════════════════════════════════════╗' | sed "s/^/$(printf '%*s' $padding '')/"
+        printf "%*s" $padding ""; echo '║                              Windows Toolkit Menu                            ║'
+        printf "%*s" $padding ""; echo '║                                                                              ║'
+        printf "%*s" $padding ""; echo '║  Select an option:                                                           ║'
+        printf "%*s" $padding ""; echo '║  1) Debloat & Tweaks Selection                                              ║'
+        printf "%*s" $padding ""; echo '║  2) Ultimate Performance Power Plan Setup                                   ║'
+        printf "%*s" $padding ""; echo '║  3) Essential Applications Installation                                     ║'
+        printf "%*s" $padding ""; echo '║  4) Terminal AI CLI Tools Setup                                             ║'
+        printf "%*s" $padding ""; echo '║  5) F3 Left Click AutoHotkey Script Deployment                             ║'
+        printf "%*s" $padding ""; echo '║  6) System Settings Automation                                             ║'
+        printf "%*s" $padding ""; echo '║  7) Run All (Complete Setup)                                                ║'
+        printf "%*s" $padding ""; echo '║  0) Exit                                                                   ║'
+        printf "%*s" $padding ""; echo '╚══════════════════════════════════════════════════════════════════════════════╝'
+        # Add some space after the menu
+        for i in $(seq 1 5); do echo; done
+    else
+        # If terminal is too narrow, use original format
+        cat << 'EOF'
 ╔══════════════════════════════════════════════════════════════════════════════╗
 ║                              Windows Toolkit Menu                            ║
 ║                                                                              ║
@@ -2582,6 +2609,7 @@ show_menu() {
 ║  0) Exit                                                                   ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 EOF
+    fi
 }
 
 # Run all phases sequentially
