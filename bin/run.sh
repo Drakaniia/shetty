@@ -56,49 +56,13 @@ header() {
     echo -e "${PURPLE}================================${NC}\n"
 }
 
-# Check if running in appropriate environment
-check_environment() {
-    header "Environment Validation"
-
-    # Check Windows version
-    if ! command -v powershell.exe &> /dev/null; then
-        error "PowerShell not found. This script requires Windows with PowerShell."
-        exit 1
-    fi
-
-    # Check Windows version
-    local windows_version=$(powershell.exe -Command "(Get-WmiObject -Class Win32_OperatingSystem).Caption" 2>/dev/null | tr -d '\r')
-    info "Detected: $windows_version"
-
-    if [[ ! "$windows_version" =~ (Windows 10|Windows 11) ]]; then
-        warning "This script is designed for Windows 10/11. Detected: $windows_version"
-        read -p "Continue anyway? (y/N): " -n 1 -r
-        echo
-        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-            exit 1
-        fi
-    fi
-
-    # Create logs directory
-    mkdir -p "$LOGS_DIR"
-
-    success "Environment validation completed"
-    log "INFO" "Session started - Windows version: $windows_version"
-}
-
-# Check for administrator privileges
+# Check for administrator privileges - only returns status, no warnings
 check_admin_privileges() {
-    header "Administrator Elevation Check"
-
     local is_admin=$(powershell.exe -Command "([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')" 2>/dev/null | tr -d '\r')
 
     if [[ "$is_admin" == "True" ]]; then
-        success "Running with Administrator privileges"
         return 0
     else
-        warning "Administrator privileges required for full functionality"
-        echo
-        echo "Some features require Administrator privileges."
         return 1
     fi
 }
@@ -374,14 +338,21 @@ Main
 SCRIPTEND
 )
 
-    export SESSION_LOG="$SESSION_LOG"
-    export SELECTIONS="$selections"
-    
-    if powershell.exe -ExecutionPolicy Bypass -Command "$debloat_script"; then
-        success "Debloat Script Selection completed successfully"
-        return 0
+    if check_admin_privileges; then
+        export SESSION_LOG="$SESSION_LOG"
+        export SELECTIONS="$selections"
+
+        if powershell.exe -ExecutionPolicy Bypass -Command "$debloat_script"; then
+            success "Debloat Script Selection completed successfully"
+            return 0
+        else
+            error "Debloat Script Selection failed"
+            return 1
+        fi
     else
-        error "Debloat Script Selection failed"
+        echo "Administrator privileges required for debloat scripts"
+        echo "To run with Administrator privileges, copy and paste this command in PowerShell as Administrator:"
+        echo "Start-Process powershell -Verb RunAs -ArgumentList '-NoProfile', '-Command', 'Set-Location (Get-Location); bash bin/run.sh'"
         return 1
     fi
 }
@@ -687,13 +658,20 @@ Main
 SCRIPTEND
 )
 
-    export SESSION_LOG="$SESSION_LOG"
-    
-    if powershell.exe -ExecutionPolicy Bypass -Command "$power_plan_script"; then
-        success "Ultimate Performance Power Plan Setup completed successfully"
-        return 0
+    if check_admin_privileges; then
+        export SESSION_LOG="$SESSION_LOG"
+
+        if powershell.exe -ExecutionPolicy Bypass -Command "$power_plan_script"; then
+            success "Ultimate Performance Power Plan Setup completed successfully"
+            return 0
+        else
+            error "Ultimate Performance Power Plan Setup failed"
+            return 1
+        fi
     else
-        error "Ultimate Performance Power Plan Setup failed"
+        echo "Administrator privileges required for power plan setup"
+        echo "To run with Administrator privileges, copy and paste this command in PowerShell as Administrator:"
+        echo "Start-Process powershell -Verb RunAs -ArgumentList '-NoProfile', '-Command', 'Set-Location (Get-Location); bash bin/run.sh'"
         return 1
     fi
 }
@@ -1227,13 +1205,20 @@ Main
 SCRIPTEND
 )
 
-    export SESSION_LOG="$SESSION_LOG"
-    
-    if powershell.exe -ExecutionPolicy Bypass -Command "$install_apps_script"; then
-        success "Essential Applications Installation completed successfully"
-        return 0
+    if check_admin_privileges; then
+        export SESSION_LOG="$SESSION_LOG"
+
+        if powershell.exe -ExecutionPolicy Bypass -Command "$install_apps_script"; then
+            success "Essential Applications Installation completed successfully"
+            return 0
+        else
+            error "Essential Applications Installation failed"
+            return 1
+        fi
     else
-        error "Essential Applications Installation failed"
+        echo "Administrator privileges required for application installation"
+        echo "To run with Administrator privileges, copy and paste this command in PowerShell as Administrator:"
+        echo "Start-Process powershell -Verb RunAs -ArgumentList '-NoProfile', '-Command', 'Set-Location (Get-Location); bash bin/run.sh'"
         return 1
     fi
 }
@@ -2549,13 +2534,20 @@ Main
 SCRIPTEND
 )
 
-    export SESSION_LOG="$SESSION_LOG"
-    
-    if powershell.exe -ExecutionPolicy Bypass -Command "$system_settings_script"; then
-        success "System Settings Configuration completed successfully"
-        return 0
+    if check_admin_privileges; then
+        export SESSION_LOG="$SESSION_LOG"
+
+        if powershell.exe -ExecutionPolicy Bypass -Command "$system_settings_script"; then
+            success "System Settings Configuration completed successfully"
+            return 0
+        else
+            error "System Settings Configuration failed"
+            return 1
+        fi
     else
-        error "System Settings Configuration failed"
+        echo "Administrator privileges required for system settings configuration"
+        echo "To run with Administrator privileges, copy and paste this command in PowerShell as Administrator:"
+        echo "Start-Process powershell -Verb RunAs -ArgumentList '-NoProfile', '-Command', 'Set-Location (Get-Location); bash bin/run.sh'"
         return 1
     fi
 }
@@ -2568,15 +2560,13 @@ show_menu() {
 ║                              Windows Toolkit Menu                            ║
 ║                                                                              ║
 ║  Select an option:                                                           ║
-║  1) Environment Validation                                                  ║
-║  2) Administrator Privileges Check                                          ║
-║  3) Debloat & Tweaks Selection                                              ║
-║  4) Ultimate Performance Power Plan Setup                                   ║
-║  5) Essential Applications Installation                                     ║
-║  6) Terminal AI CLI Tools Setup                                             ║
-║  7) AutoHotkey Setup & Script Deployment                                   ║
-║  8) System Settings Automation                                             ║
-║  9) Run All (Complete Setup)                                                ║
+║  1) Debloat & Tweaks Selection                                              ║
+║  2) Ultimate Performance Power Plan Setup                                   ║
+║  3) Essential Applications Installation                                     ║
+║  4) Terminal AI CLI Tools Setup                                             ║
+║  5) F3 Left Click AutoHotkey Script Deployment                             ║
+║  6) System Settings Automation                                             ║
+║  7) Run All (Complete Setup)                                                ║
 ║  0) Exit                                                                   ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 EOF
@@ -2586,44 +2576,38 @@ EOF
 run_all_phases() {
     info "Starting complete setup..."
 
-    # Check admin privileges first
-    local has_admin=false
-    if check_admin_privileges; then
-        has_admin=true
+    # Phase 1: Optional debloat (requires admin)
+    if ! debloat_selection; then
+        echo "Debloat scripts require Administrator privileges"
+        echo "To run with Administrator privileges, copy and paste this command in PowerShell as Administrator:"
+        echo "Start-Process powershell -Verb RunAs -ArgumentList '-NoProfile', '-Command', 'Set-Location (Get-Location); bash bin/run.sh'"
     fi
 
-    # Phase 2: Optional debloat (requires admin)
-    if [[ "$has_admin" == true ]]; then
-        debloat_selection
-    else
-        warning "Skipping debloat scripts (requires Administrator privileges)"
+    # Phase 2: Power plan (requires admin)
+    if ! setup_power_plan; then
+        echo "Power plan setup requires Administrator privileges"
+        echo "To run with Administrator privileges, copy and paste this command in PowerShell as Administrator:"
+        echo "Start-Process powershell -Verb RunAs -ArgumentList '-NoProfile', '-Command', 'Set-Location (Get-Location); bash bin/run.sh'"
     fi
 
-    # Phase 3: Power plan (requires admin)
-    if [[ "$has_admin" == true ]]; then
-        setup_power_plan
-    else
-        warning "Skipping power plan setup (requires Administrator privileges)"
+    # Phase 3: Applications (requires admin for some apps)
+    if ! install_applications; then
+        echo "Application installation requires Administrator privileges"
+        echo "To run with Administrator privileges, copy and paste this command in PowerShell as Administrator:"
+        echo "Start-Process powershell -Verb RunAs -ArgumentList '-NoProfile', '-Command', 'Set-Location (Get-Location); bash bin/run.sh'"
     fi
 
-    # Phase 4: Applications (requires admin for some apps)
-    if [[ "$has_admin" == true ]]; then
-        install_applications
-    else
-        warning "Skipping application installation (requires Administrator privileges)"
-    fi
-
-    # Phase 5: CLI tools (can run without admin if Node.js available)
+    # Phase 4: CLI tools (can run without admin if Node.js available)
     setup_cli_tools
 
-    # Phase 6: AutoHotkey (can run without admin)
+    # Phase 5: AutoHotkey (can run without admin)
     setup_autohotkey
 
-    # Phase 7: System settings (mixed requirements)
-    if [[ "$has_admin" == true ]]; then
-        configure_system_settings
-    else
-        warning "Skipping system settings configuration (requires Administrator privileges)"
+    # Phase 6: System settings (mixed requirements)
+    if ! configure_system_settings; then
+        echo "System settings configuration requires Administrator privileges"
+        echo "To run with Administrator privileges, copy and paste this command in PowerShell as Administrator:"
+        echo "Start-Process powershell -Verb RunAs -ArgumentList '-NoProfile', '-Command', 'Set-Location (Get-Location); bash bin/run.sh'"
     fi
 
     show_completion_summary
@@ -2661,62 +2645,54 @@ main() {
 
         case $choice in
             1)
-                check_environment
-                read -p "Press Enter to continue..."
-                ;;
-            2)
-                check_admin_privileges
-                read -p "Press Enter to continue..."
-                ;;
-            3)
                 if check_admin_privileges; then
                     debloat_selection
                 else
                     echo "Administrator privileges required for debloat scripts"
-                    echo "To run with Administrator privileges, use this command in PowerShell:"
+                    echo "To run with Administrator privileges, copy and paste this command in PowerShell as Administrator:"
+                    echo "Start-Process powershell -Verb RunAs -ArgumentList '-NoProfile', '-Command', 'Set-Location (Get-Location); bash bin/run.sh'"
+                fi
+                read -p "Press Enter to continue..."
+                ;;
+            2)
+                if check_admin_privileges; then
+                    setup_power_plan
+                else
+                    echo "Administrator privileges required for power plan setup"
+                    echo "To run with Administrator privileges, copy and paste this command in PowerShell as Administrator:"
+                    echo "Start-Process powershell -Verb RunAs -ArgumentList '-NoProfile', '-Command', 'Set-Location (Get-Location); bash bin/run.sh'"
+                fi
+                read -p "Press Enter to continue..."
+                ;;
+            3)
+                if check_admin_privileges; then
+                    install_applications
+                else
+                    echo "Administrator privileges required for application installation"
+                    echo "To run with Administrator privileges, copy and paste this command in PowerShell as Administrator:"
                     echo "Start-Process powershell -Verb RunAs -ArgumentList '-NoProfile', '-Command', 'Set-Location (Get-Location); bash bin/run.sh'"
                 fi
                 read -p "Press Enter to continue..."
                 ;;
             4)
-                if check_admin_privileges; then
-                    setup_power_plan
-                else
-                    echo "Administrator privileges required for power plan setup"
-                    echo "To run with Administrator privileges, use this command in PowerShell:"
-                    echo "Start-Process powershell -Verb RunAs -ArgumentList '-NoProfile', '-Command', 'Set-Location (Get-Location); bash bin/run.sh'"
-                fi
-                read -p "Press Enter to continue..."
-                ;;
-            5)
-                if check_admin_privileges; then
-                    install_applications
-                else
-                    echo "Administrator privileges required for application installation"
-                    echo "To run with Administrator privileges, use this command in PowerShell:"
-                    echo "Start-Process powershell -Verb RunAs -ArgumentList '-NoProfile', '-Command', 'Set-Location (Get-Location); bash bin/run.sh'"
-                fi
-                read -p "Press Enter to continue..."
-                ;;
-            6)
                 setup_cli_tools
                 read -p "Press Enter to continue..."
                 ;;
-            7)
+            5)
                 setup_autohotkey
                 read -p "Press Enter to continue..."
                 ;;
-            8)
+            6)
                 if check_admin_privileges; then
                     configure_system_settings
                 else
                     echo "Administrator privileges required for system settings configuration"
-                    echo "To run with Administrator privileges, use this command in PowerShell:"
+                    echo "To run with Administrator privileges, copy and paste this command in PowerShell as Administrator:"
                     echo "Start-Process powershell -Verb RunAs -ArgumentList '-NoProfile', '-Command', 'Set-Location (Get-Location); bash bin/run.sh'"
                 fi
                 read -p "Press Enter to continue..."
                 ;;
-            9)
+            7)
                 run_all_phases
                 read -p "Press Enter to continue..."
                 ;;
@@ -2725,7 +2701,7 @@ main() {
                 exit 0
                 ;;
             *)
-                error "Invalid choice. Please enter a number between 0 and 9."
+                error "Invalid choice. Please enter a number between 0 and 7."
                 read -p "Press Enter to continue..."
                 ;;
         esac
