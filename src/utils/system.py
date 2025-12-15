@@ -209,13 +209,29 @@ class SystemUtils:
             return False, str(e)
     
     def check_program_exists(self, program_name):
-        """Check if a program is available in the system PATH"""
-        try:
-            subprocess.run([program_name, "--version"], 
-                         capture_output=True, check=True, timeout=10)
-            return True
-        except (subprocess.CalledProcessError, FileNotFoundError, subprocess.TimeoutExpired):
-            return False
+        """Check if a program is available in the system PATH
+
+        For Node.js, we'll try multiple variations since it might be installed differently
+        """
+        # Special handling for node.js detection to try multiple possible names/locations
+        if program_name.lower() in ['node', 'nodejs']:
+            node_variants = ['node', 'nodejs']
+            for variant in node_variants:
+                try:
+                    result = subprocess.run([variant, "--version"],
+                                          capture_output=True, check=True, timeout=10)
+                    return True
+                except (subprocess.CalledProcessError, FileNotFoundError, subprocess.TimeoutExpired):
+                    continue
+            return False  # None of the variants worked
+        else:
+            # For other programs, use the original method
+            try:
+                subprocess.run([program_name, "--version"],
+                             capture_output=True, check=True, timeout=10)
+                return True
+            except (subprocess.CalledProcessError, FileNotFoundError, subprocess.TimeoutExpired):
+                return False
     
     def ensure_directory_exists(self, directory_path):
         """Ensure a directory exists, create if it doesn't"""
