@@ -2,7 +2,7 @@
 
 A comprehensive, modular Windows 10/11 optimization and productivity toolkit that automates system tweaks, software installation, and configuration tasks.
 
-## 🏗️ Architecture
+## Architecture
 
 This toolkit has been completely redesigned with a modular, scalable architecture:
 
@@ -31,15 +31,15 @@ windows-automation-toolkit/
 └── README.md                    # This file
 ```
 
-## 🚀 Features
+## Features
 
-### 🔧 Core Functionality
+### Core Functionality
 - **Administrator Detection**: Automatically detects and requests admin privileges
 - **Modular Architecture**: Each feature is a separate, extensible module
 - **Safety Confirmations**: User confirmation before all system operations
 - **Error Handling**: Comprehensive error handling with clear status messages
 
-### 🛠️ Available Modules
+### Available Modules
 
 1. **Windows Debloat & Tweaks** (`debloat.py`)
    - Win11Debloat (raphi.re)
@@ -78,7 +78,7 @@ windows-automation-toolkit/
    - Startup integration
    - Script status monitoring
 
-## 📋 Requirements
+## Requirements
 
 - Windows 10/11
 - Python 3.10+
@@ -86,7 +86,7 @@ windows-automation-toolkit/
 - Internet connection (for downloads)
 - Windows Package Manager (winget) - for app installation
 
-## 🛠️ Installation
+## Installation
 
 1. Clone or download this repository
 2. Install required Python packages:
@@ -99,7 +99,7 @@ windows-automation-toolkit/
    python main.py
    ```
 
-## 🚀 Usage
+## Usage
 
 The toolkit features a clean menu-driven interface:
 
@@ -108,9 +108,9 @@ The toolkit features a clean menu-driven interface:
 3. **Main Menu**: Choose from 6 main modules
 4. **Module Menus**: Each module has its own submenu with specific options
 5. **Confirmation**: All operations require user confirmation
-6. **Feedback**: Clear success/failure messages with emoji indicators
+6. **Feedback**: Clear success/failure messages with indicators
 
-## 🔧 Extending the Toolkit
+## Extending the Toolkit
 
 The modular architecture makes it easy to add new functionality:
 
@@ -132,7 +132,7 @@ The modular architecture makes it easy to add new functionality:
 1. Add utility functions to `src/utils/system.py`
 2. Make them available to all modules
 
-## 🎯 AutoHotKey Script
+## AutoHotKey Script
 
 The included AutoHotKey script provides:
 - **F3 → Left Mouse Button**: Full mouse control using F3 key
@@ -140,14 +140,14 @@ The included AutoHotKey script provides:
 
 Script location: `Documents\AutoHotKey\automation.ahk`
 
-## ⚡ Performance
+## Performance
 
 - **Modular Loading**: Only load modules when needed
 - **Efficient Commands**: Optimized PowerShell and subprocess calls
 - **Timeout Handling**: Prevent hanging operations
 - **Memory Management**: Clean resource handling
 
-## 🛡️ Safety Features
+## Safety Features
 
 - **User Confirmation**: All system operations require explicit consent
 - **Command Transparency**: Shows commands before execution
@@ -155,22 +155,22 @@ Script location: `Documents\AutoHotKey\automation.ahk`
 - **Non-Destructive**: No permanent changes without user consent
 - **Rollback Support**: Easy to undo changes where possible
 
-## 🧪 Testing
+## Testing
 
 The modular structure makes testing easier:
 
 ```bash
 # Test individual modules
-python -c "from src.modules.debloat import WindowsDebloat; print('✅ Debloat module works')"
+python -c "from src.modules.debloat import WindowsDebloat; print('Debloat module works')"
 
 # Test configuration
-python -c "from src.config.settings import UI_CONFIG; print('✅ Config works')"
+python -c "from src.config.settings import UI_CONFIG; print('Config works')"
 
 # Test utilities
-python -c "from src.utils.system import SystemUtils; print('✅ Utils work')"
+python -c "from src.utils.system import SystemUtils; print('Utils work')"
 ```
 
-## 🔄 Updates
+## Updates
 
 The modular architecture allows for easy updates:
 
@@ -178,11 +178,11 @@ The modular architecture allows for easy updates:
 - **Configuration Updates**: Centralized configuration management
 - **Dependency Management**: Clear dependency structure
 
-## 📝 License
+## License
 
 This toolkit is provided for educational and personal use. Use at your own risk.
 
-## 🤝 Contributing
+## Contributing
 
 The modular structure makes contributions easy:
 
@@ -193,14 +193,14 @@ The modular structure makes contributions easy:
 5. Test your changes
 6. Submit a pull request
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 - **Winget not found**: Install Windows Package Manager from Microsoft Store
 - **PowerShell scripts blocked**: Run as administrator for proper execution
 - **Node.js required**: Install Node.js via Essential Apps installer before AI tools
 - **Module import errors**: Check Python path and ensure all `__init__.py` files exist
 
-## 📊 Version History
+## Version History
 
 - **v2.0.0**: Complete modular rewrite with scalable architecture
 - **v1.0.0**: Original monolithic implementation
