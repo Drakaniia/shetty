@@ -258,8 +258,14 @@ function Main {
     if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
         Write-Host "⚠️  Administrator privileges required for debloat scripts." -ForegroundColor Red
         Write-Log "ERROR" "Debloat scripts require administrator privileges"
-        Write-Host "To run with Administrator privileges, use this command in PowerShell:"
-        Write-Host "Start-Process powershell -Verb RunAs -ArgumentList '-NoProfile', '-Command', 'Set-Location (Get-Location); bash bin/run.sh'" -ForegroundColor Yellow
+        Write-Host "To run with Administrator privileges:"
+        Write-Host "1. Open a new PowerShell terminal AS ADMINISTRATOR" -ForegroundColor Cyan
+        Write-Host "2. Navigate to the project directory" -ForegroundColor Cyan
+        $projectDir = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
+        Write-Host "   cd ""$projectDir""" -ForegroundColor White
+        Write-Host "3. Run the script using one of these methods:" -ForegroundColor Cyan
+        Write-Host "   Option A: If Git Bash is installed, run: ""C:\Program Files\Git\bin\bash.exe"" bin/run.sh" -ForegroundColor White
+        Write-Host "   Option B: Open Git Bash separately and navigate to this directory" -ForegroundColor White
         exit 1
     }
 
@@ -618,8 +624,14 @@ function Main {
     if (-NOT (Test-Administrator)) {
         Write-Error "Administrator privileges required for power plan configuration"
         Write-Log "ERROR" "Power plan setup requires administrator privileges"
-        Write-Host "To run with Administrator privileges, use this command in PowerShell:"
-        Write-Host "Start-Process powershell -Verb RunAs -ArgumentList '-NoProfile', '-Command', 'Set-Location (Get-Location); bash bin/run.sh'" -ForegroundColor Yellow
+        Write-Host "To run with Administrator privileges:" -ForegroundColor Cyan
+        Write-Host "1. Open a new PowerShell terminal AS ADMINISTRATOR" -ForegroundColor Cyan
+        Write-Host "2. Navigate to the project directory" -ForegroundColor Cyan
+        $projectDir = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
+        Write-Host "   cd ""$projectDir""" -ForegroundColor White
+        Write-Host "3. Run the script using one of these methods:" -ForegroundColor Cyan
+        Write-Host "   Option A: If Git Bash is installed, run: ""C:\Program Files\Git\bin\bash.exe"" bin/run.sh" -ForegroundColor White
+        Write-Host "   Option B: Open Git Bash separately and navigate to this directory" -ForegroundColor White
         exit 1
     }
 
@@ -1150,8 +1162,14 @@ function Main {
     if (-NOT (Test-Administrator)) {
         Write-Error "Administrator privileges required for application installation"
         Write-Log "ERROR" "Application installation requires administrator privileges"
-        Write-Host "To run with Administrator privileges, use this command in PowerShell:"
-        Write-Host "Start-Process powershell -Verb RunAs -ArgumentList '-NoProfile', '-Command', 'Set-Location (Get-Location); bash bin/run.sh'" -ForegroundColor Yellow
+        Write-Host "To run with Administrator privileges:" -ForegroundColor Cyan
+        Write-Host "1. Open a new PowerShell terminal AS ADMINISTRATOR" -ForegroundColor Cyan
+        Write-Host "2. Navigate to the project directory" -ForegroundColor Cyan
+        $projectDir = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
+        Write-Host "   cd ""$projectDir""" -ForegroundColor White
+        Write-Host "3. Run the script using one of these methods:" -ForegroundColor Cyan
+        Write-Host "   Option A: If Git Bash is installed, run: ""C:\Program Files\Git\bin\bash.exe"" bin/run.sh" -ForegroundColor White
+        Write-Host "   Option B: Open Git Bash separately and navigate to this directory" -ForegroundColor White
         exit 1
     }
 
@@ -2500,8 +2518,14 @@ function Main {
     $isAdmin = Test-Administrator
     if (-not $isAdmin) {
         Write-Warning "Some settings require Administrator privileges and will be skipped"
-        Write-Host "To run with Administrator privileges, use this command in PowerShell:"
-        Write-Host "Start-Process powershell -Verb RunAs -ArgumentList '-NoProfile', '-Command', 'Set-Location (Get-Location); bash bin/run.sh'" -ForegroundColor Yellow
+        Write-Host "To run with Administrator privileges:" -ForegroundColor Cyan
+        Write-Host "1. Open a new PowerShell terminal AS ADMINISTRATOR" -ForegroundColor Cyan
+        Write-Host "2. Navigate to the project directory" -ForegroundColor Cyan
+        $projectDir = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
+        Write-Host "   cd ""$projectDir""" -ForegroundColor White
+        Write-Host "3. Run the script using one of these methods:" -ForegroundColor Cyan
+        Write-Host "   Option A: If Git Bash is installed, run: ""C:\Program Files\Git\bin\bash.exe"" bin/run.sh" -ForegroundColor White
+        Write-Host "   Option B: Open Git Bash separately and navigate to this directory" -ForegroundColor White
     }
 
     # Apply registry-based settings
