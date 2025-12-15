@@ -24,15 +24,15 @@ class AutoHotKeyManager:
             self.system.clear_screen()
             self.system.print_header("AutoHotKey Setup & Management")
             
-            print("🎹 AutoHotKey Options")
+            print("AutoHotKey Options")
             print("=" * 40)
-            print("[1] 📦 Install AutoHotKey")
-            print("[2] 📝 Create/Update Script")
-            print("[3] ▶️ Run Script")
-            print("[4] ⏹️ Stop Script")
-            print("[5] 🚀 Add to Startup")
-            print("[6] 📋 Script Status")
-            print("[0] 🚪 Back to Main Menu")
+            print("[1] Install AutoHotKey")
+            print("[2] Create/Update Script")
+            print("[3] Run Script")
+            print("[4] Stop Script")
+            print("[5] Add to Startup")
+            print("[6] Script Status")
+            print("[0] Back to Main Menu")
             
             choice = input("\nSelect option: ").strip()
             
@@ -69,7 +69,7 @@ class AutoHotKeyManager:
     
     def install_autohotkey(self):
         """Install AutoHotKey using winget"""
-        print("\n📦 Installing AutoHotKey...")
+        print("\nInstalling AutoHotKey...")
         print("=" * 40)
         
         if self.check_autohotkey_installed():
@@ -181,7 +181,7 @@ class AutoHotKeyManager:
             
             if self.is_script_running():
                 print("✅ AutoHotKey script is now running")
-                print("\n🎹 Active Features:")
+                print("\nActive Features:")
                 print("• F3 → Left Mouse Button (hold/drag)")
                 print("• Middle Mouse → Browser Back")
             else:
@@ -225,7 +225,7 @@ class AutoHotKeyManager:
     
     def add_to_startup(self):
         """Add AutoHotKey script to Windows startup"""
-        print("\n🚀 Adding Script to Startup...")
+        print("\nAdding Script to Startup...")
         print("=" * 40)
         
         script_path = self.get_script_path()

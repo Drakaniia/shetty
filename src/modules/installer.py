@@ -28,7 +28,7 @@ class AppInstaller:
                 self.system.pause_execution()
                 return
             
-            print("📦 Available Apps to Install")
+            print("Available Apps to Install")
             print("=" * 40)
             
             for i, app in enumerate(self.apps, 1):
@@ -74,7 +74,7 @@ class AppInstaller:
     
     def install_app_winget(self, app_id, app_name):
         """Install application using winget"""
-        print(f"\n📦 Installing {app_name}...")
+        print(f"\nInstalling {app_name}...")
         print(f"🔧 Package ID: {app_id}")
         print("-" * 40)
         

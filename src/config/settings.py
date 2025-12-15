@@ -83,13 +83,13 @@ UI_CONFIG = {
     "header_title": "Windows Automation Toolkit",
     "header_subtitle": "Windows 10/11 Optimization Suite",
     "menu_options": {
-        "1": {"title": "Windows Debloat & Tweaks", "icon": "🧹"},
-        "2": {"title": "Windows Settings & Run Commands", "icon": "⚙️"},
-        "3": {"title": "Unlock Ultimate Performance", "icon": "⚡"},
-        "4": {"title": "Install Essential Apps", "icon": "📦"},
-        "5": {"title": "Install Terminal AI Tools", "icon": "🤖"},
-        "6": {"title": "Setup AutoHotKey", "icon": "🎹"},
-        "0": {"title": "Exit", "icon": "🚪"}
+        "1": {"title": "Windows Debloat & Tweaks"},
+        "2": {"title": "Windows Settings & Run Commands"},
+        "3": {"title": "Unlock Ultimate Performance"},
+        "4": {"title": "Install Essential Apps"},
+        "5": {"title": "Install Terminal AI Tools"},
+        "6": {"title": "Setup AutoHotKey"},
+        "0": {"title": "Exit"}
     }
 }
 

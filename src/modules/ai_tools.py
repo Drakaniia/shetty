@@ -28,7 +28,7 @@ class AIToolsInstaller:
                 self.system.pause_execution()
                 return
             
-            print("🤖 Available AI Tools to Install")
+            print("Available AI Tools to Install")
             print("=" * 40)
             
             for i, tool in enumerate(self.tools, 1):
@@ -82,7 +82,7 @@ class AIToolsInstaller:
     
     def install_npm_tool(self, package, name):
         """Install an npm package globally"""
-        print(f"\n📦 Installing {name}...")
+        print(f"\nInstalling {name}...")
         print(f"🔧 Package: {package}")
         print("-" * 40)
         
@@ -244,7 +244,7 @@ class AIToolsInstaller:
         print(f"npm: {'✅ Available' if npm_available else '❌ Not Available'}")
         
         if node_available and npm_available:
-            print("\n🤖 AI Tools:")
+            print("\nAI Tools:")
             for tool in self.tools:
                 if self.check_npm_tool_installed(tool['package']):
                     print(f"✅ {tool['name']} - Installed")

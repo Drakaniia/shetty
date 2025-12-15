@@ -89,7 +89,7 @@ class SystemUtils:
     
     def run_powershell_script(self, script_url, description):
         """Execute a PowerShell script from URL"""
-        print(f"\n🚀 {description}")
+        print(f"\n{description}")
         print("=" * 50)
         
         if not self.get_confirmation(f"Run {description}? This will execute PowerShell scripts from the internet."):
@@ -173,19 +173,29 @@ class SystemUtils:
             print(subtitle_border)
             print(f"║  {subtitle}  ║")
         print(footer)
-        print(f"👤 Running as: {'Administrator ✅' if self.is_admin else 'User ⚠️'}")
+        print(f"Running as: {'Administrator' if self.is_admin else 'User'}")
         print()
     
     def print_menu(self, title, options):
-        """Print a formatted menu"""
-        print(f"🚀 {title}")
-        print("=" * 40)
-        
+        """Print a formatted centered menu without border"""
+        # Calculate the width of the longest option
+        max_option_length = len(title)
         for key, option in options.items():
-            icon = option.get('icon', '📋')
-            option_title = option.get('title', 'Unknown')
-            print(f"[{key}] {icon} {option_title}")
-        
+            option_text = f"[{key}] {option.get('title', 'Unknown')}"
+            max_option_length = max(max_option_length, len(option_text))
+
+        # Pad to ensure minimum width
+        max_option_length = max(max_option_length, 40)
+
+        # Print centered title
+        print(f"{title:^{max_option_length}}")
+        print("-" * max_option_length)
+
+        # Print each option centered
+        for key, option in options.items():
+            option_text = f"[{key}] {option.get('title', 'Unknown')}"
+            print(f"{option_text:^{max_option_length}}")
+
         print()
     
     def get_menu_choice(self, options):

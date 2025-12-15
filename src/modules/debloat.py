@@ -19,16 +19,16 @@ class WindowsDebloat:
             self.system.clear_screen()
             self.system.print_header("Windows Debloat & Tweaks")
             
-            print("🧹 Available Debloat & Tweaks Options")
+            print("Available Debloat & Tweaks Options")
             print("=" * 50)
             
             # Debloat options
-            print("\n📦 Debloat Options:")
+            print("\nDebloat Options:")
             for i, (key, script) in enumerate(self.scripts["debloat"].items(), 1):
                 print(f"[{i}] {script['name']} - {script['description']}")
             
             # Tweaks options
-            print("\n⚙️ Windows Tweaks:")
+            print("\nWindows Tweaks:")
             tweak_count = len(self.scripts["debloat"])
             for i, (key, script) in enumerate(self.scripts["tweaks"].items(), tweak_count + 1):
                 print(f"[{i}] {script['name']} - {script['description']}")

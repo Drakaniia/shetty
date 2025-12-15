@@ -21,14 +21,14 @@ class PowerManagement:
             self.system.clear_screen()
             self.system.print_header("Power Management")
             
-            print("⚡ Power Management Options")
+            print("Power Management Options")
             print("=" * 40)
-            print("[1] 🔓 Unlock Ultimate Performance Plan")
-            print("[2] 📋 List All Power Plans")
-            print("[3] ✅ Show Active Power Plan")
-            print("[4] 🔄 Switch Power Plan")
-            print("[5] ⚙️ Create Custom Power Plan")
-            print("[0] 🚪 Back to Main Menu")
+            print("[1] Unlock Ultimate Performance Plan")
+            print("[2] List All Power Plans")
+            print("[3] Show Active Power Plan")
+            print("[4] Switch Power Plan")
+            print("[5] Create Custom Power Plan")
+            print("[0] Back to Main Menu")
             
             choice = input("\nSelect option: ").strip()
             
@@ -50,7 +50,7 @@ class PowerManagement:
     
     def unlock_ultimate_performance(self):
         """Unlock Ultimate Performance power plan"""
-        print("\n⚡ Ultimate Performance Power Plan Unlocker")
+        print("\nUltimate Performance Power Plan Unlocker")
         print("=" * 50)
         
         if not self.system.get_confirmation("Unlock Ultimate Performance power plan?"):
@@ -175,7 +175,7 @@ class PowerManagement:
     
     def create_custom_plan(self):
         """Create a custom power plan"""
-        print("\n⚙️ Create Custom Power Plan")
+        print("\nCreate Custom Power Plan")
         print("=" * 35)
         
         plan_name = input("Enter name for the custom power plan: ").strip()

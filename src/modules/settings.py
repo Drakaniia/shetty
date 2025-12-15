@@ -20,7 +20,7 @@ class WindowsSettings:
             self.system.clear_screen()
             self.system.print_header("Windows Settings & Run Commands")
             
-            print("⚙️ Available Windows Settings")
+            print("Available Windows Settings")
             print("=" * 40)
             
             options = {
@@ -34,9 +34,9 @@ class WindowsSettings:
             
             for key, option in options.items():
                 if key == "0":
-                    print(f"[{key}] 🚪 {option['title']}")
+                    print(f"[{key}] {option['title']}")
                 else:
-                    print(f"[{key}] ⚙️ {option['title']}")
+                    print(f"[{key}] {option['title']}")
             
             choice = input("\nSelect option: ").strip()
             

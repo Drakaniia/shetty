@@ -89,12 +89,12 @@ class WindowsAutomationToolkit:
         print("║                                                              ║")
         print("║  Your Windows system has been optimized and enhanced!        ║")
         print("║                                                              ║")
-        print("║  🚀 Productivity Boosted!                                    ║")
-        print("║  ⚡ Performance Optimized!                                   ║")
-        print("║  🛡️ System Secured!                                         ║")
+        print("║  Productivity Boosted!                                       ║")
+        print("║  Performance Optimized!                                      ║")
+        print("║  System Secured!                                             ║")
         print("╚══════════════════════════════════════════════════════════════╝")
         print()
-        print("👋 Goodbye and enjoy your optimized Windows experience!")
+        print("Goodbye and enjoy your optimized Windows experience!")
     
     def show_system_info(self):
         """Display system information"""
