@@ -45,15 +45,12 @@ class WindowsDebloat:
 
             self.system.print_menu("DEBLOAT & TWEAKS", options)
 
-            choice = input("\nSelect option: ").strip()
+            choice = self.system.get_menu_choice(options)
 
             if choice == "0":
                 return
             elif choice.isdigit():
                 self.handle_debloat_choice(int(choice))
-            else:
-                print("❌ Invalid option")
-                self.system.pause_execution()
     
     def handle_debloat_choice(self, choice):
         """Handle user's debloat choice"""

@@ -177,7 +177,7 @@ class SystemUtils:
         print()
     
     def print_menu(self, title, options):
-        """Print a formatted menu with left-aligned numbers and padding"""
+        """Print a formatted menu with consistent left padding for better appearance"""
         # Calculate the width of the longest option
         max_option_length = len(title)
         for key, option in options.items():
@@ -187,14 +187,17 @@ class SystemUtils:
         # Pad to ensure minimum width
         max_option_length = max(max_option_length, 40)
 
-        # Print title with padding for alignment
-        print(f"{title:<{max_option_length}}")
-        print("-" * max_option_length)
+        # Add consistent left padding (e.g., 10 spaces) for better visual appearance
+        left_padding = " " * 5  # Add 5 spaces on the left for visual centering effect
 
-        # Print each option with left-aligned numbers and padding
+        # Print title with left padding
+        print(left_padding + title)
+        print(left_padding + "-" * len(title))
+
+        # Print each option with consistent left padding
         for key, option in options.items():
             option_text = f"[{key}] {option.get('title', 'Unknown')}"
-            print(f"{option_text:<{max_option_length}}")
+            print(left_padding + option_text)
 
         print()
     

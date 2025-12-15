@@ -38,7 +38,7 @@ class AIToolsInstaller:
 
             self.system.print_menu("AI TOOLS INSTALLER", options)
 
-            choice = input("\nSelect option: ").strip()
+            choice = self.system.get_menu_choice(options)
 
             if choice == "0":
                 return
@@ -48,9 +48,6 @@ class AIToolsInstaller:
                 self.install_single_tool(int(choice) - 1)
             elif choice == "3":
                 self.install_iflow_cli()
-            else:
-                print("❌ Invalid option")
-                self.system.pause_execution()
     
     def check_node_npm_available(self):
         """Check if Node.js and npm are available"""

@@ -37,7 +37,7 @@ class AppInstaller:
 
             self.system.print_menu("APP INSTALLER", options)
 
-            choice = input("\nSelect option: ").strip()
+            choice = self.system.get_menu_choice(options)
 
             if choice == "0":
                 return
@@ -45,9 +45,6 @@ class AppInstaller:
                 self.install_all_apps()
             elif choice.isdigit() and 1 <= int(choice) <= len(self.apps):
                 self.install_single_app(int(choice) - 1)
-            else:
-                print("❌ Invalid option")
-                self.system.pause_execution()
     
     def check_winget_available(self):
         """Check if winget is available on the system"""
