@@ -354,7 +354,7 @@ SCRIPTEND
         echo "To run with Administrator privileges:"
         echo "1. Open a new PowerShell terminal AS ADMINISTRATOR"
         # Convert Unix path to Windows path for PowerShell
-        unix_path="$(dirname "$(dirname "$SCRIPT_DIR")")"
+        unix_path="$(dirname "$SCRIPT_DIR")"
         # Handle common Unix to Windows path conversions
         if [[ "$unix_path" == /c/* ]]; then
             windows_path="C:\\${unix_path#/c/}"
@@ -691,7 +691,7 @@ SCRIPTEND
         echo "To run with Administrator privileges:"
         echo "1. Open a new PowerShell terminal AS ADMINISTRATOR"
         # Convert Unix path to Windows path for PowerShell
-        unix_path="$(dirname "$(dirname "$SCRIPT_DIR")")"
+        unix_path="$(dirname "$SCRIPT_DIR")"
         # Handle common Unix to Windows path conversions
         if [[ "$unix_path" == /c/* ]]; then
             windows_path="C:\\${unix_path#/c/}"
@@ -1256,7 +1256,7 @@ SCRIPTEND
         echo "To run with Administrator privileges:"
         echo "1. Open a new PowerShell terminal AS ADMINISTRATOR"
         # Convert Unix path to Windows path for PowerShell
-        unix_path="$(dirname "$(dirname "$SCRIPT_DIR")")"
+        unix_path="$(dirname "$SCRIPT_DIR")"
         # Handle common Unix to Windows path conversions
         if [[ "$unix_path" == /c/* ]]; then
             windows_path="C:\\${unix_path#/c/}"
@@ -2603,7 +2603,7 @@ SCRIPTEND
         echo "To run with Administrator privileges:"
         echo "1. Open a new PowerShell terminal AS ADMINISTRATOR"
         # Convert Unix path to Windows path for PowerShell
-        unix_path="$(dirname "$(dirname "$SCRIPT_DIR")")"
+        unix_path="$(dirname "$SCRIPT_DIR")"
         # Handle common Unix to Windows path conversions
         if [[ "$unix_path" == /c/* ]]; then
             windows_path="C:\\${unix_path#/c/}"
@@ -2684,7 +2684,7 @@ run_all_phases() {
         echo "To run with Administrator privileges:"
         echo "1. Open a new PowerShell terminal AS ADMINISTRATOR"
         # Convert Unix path to Windows path for PowerShell
-        unix_path="$(dirname "$(dirname "$SCRIPT_DIR")")"
+        unix_path="$(dirname "$SCRIPT_DIR")"
         # Handle common Unix to Windows path conversions
         if [[ "$unix_path" == /c/* ]]; then
             windows_path="C:\\${unix_path#/c/}"
@@ -2711,7 +2711,7 @@ run_all_phases() {
         echo "To run with Administrator privileges:"
         echo "1. Open a new PowerShell terminal AS ADMINISTRATOR"
         # Convert Unix path to Windows path for PowerShell
-        unix_path="$(dirname "$(dirname "$SCRIPT_DIR")")"
+        unix_path="$(dirname "$SCRIPT_DIR")"
         # Handle common Unix to Windows path conversions
         if [[ "$unix_path" == /c/* ]]; then
             windows_path="C:\\${unix_path#/c/}"
@@ -2738,7 +2738,7 @@ run_all_phases() {
         echo "To run with Administrator privileges:"
         echo "1. Open a new PowerShell terminal AS ADMINISTRATOR"
         # Convert Unix path to Windows path for PowerShell
-        unix_path="$(dirname "$(dirname "$SCRIPT_DIR")")"
+        unix_path="$(dirname "$SCRIPT_DIR")"
         # Handle common Unix to Windows path conversions
         if [[ "$unix_path" == /c/* ]]; then
             windows_path="C:\\${unix_path#/c/}"
@@ -2771,7 +2771,7 @@ run_all_phases() {
         echo "To run with Administrator privileges:"
         echo "1. Open a new PowerShell terminal AS ADMINISTRATOR"
         # Convert Unix path to Windows path for PowerShell
-        unix_path="$(dirname "$(dirname "$SCRIPT_DIR")")"
+        unix_path="$(dirname "$SCRIPT_DIR")"
         # Handle common Unix to Windows path conversions
         if [[ "$unix_path" == /c/* ]]; then
             windows_path="C:\\${unix_path#/c/}"
