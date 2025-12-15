@@ -125,7 +125,7 @@ class AIToolsInstaller:
                     return True
                 else:
                     print(f"Failed to install {name}")
-print(f"Error: {result.stderr.strip()}")
+                    print(f"Error: {result.stderr.strip()}")
                     return False
                     
         except subprocess.TimeoutExpired:
