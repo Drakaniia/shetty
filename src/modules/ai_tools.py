@@ -54,7 +54,7 @@ class AIToolsInstaller:
                 options[str(i)] = {"title": tool['name']}
             options["3"] = {"title": "iFlow CLI"}  # iFlow CLI is special case
             options["0"] = {"title": "Back to Main Menu"}
-            options["99"] = {"title": "Install All Tools"}
+            options["a"] = {"title": "Install All Tools"}
 
             self.system.print_menu("AI TOOLS INSTALLER", options)
 
@@ -62,7 +62,7 @@ class AIToolsInstaller:
 
             if choice == "0":
                 return
-            elif choice == "99":
+            elif choice == "a":
                 self.install_all_tools()
             elif choice.isdigit() and 1 <= int(choice) <= len(self.tools):
                 self.install_single_tool(int(choice) - 1)

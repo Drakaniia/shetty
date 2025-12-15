@@ -33,7 +33,7 @@ class AppInstaller:
             for i, app in enumerate(self.apps, 1):
                 options[str(i)] = {"title": app['name']}
             options["0"] = {"title": "Back to Main Menu"}
-            options["99"] = {"title": "Install All Apps"}
+            options["a"] = {"title": "Install All Apps"}
 
             self.system.print_menu("APP INSTALLER", options)
 
@@ -41,7 +41,7 @@ class AppInstaller:
 
             if choice == "0":
                 return
-            elif choice == "99":
+            elif choice == "a":
                 self.install_all_apps()
             elif choice.isdigit() and 1 <= int(choice) <= len(self.apps):
                 self.show_app_options(int(choice) - 1)
