@@ -2682,6 +2682,7 @@ main() {
                     echo "To run with Administrator privileges:"
                     echo "1. Open a new PowerShell terminal AS ADMINISTRATOR"
                     echo "2. Navigate to the project directory"
+                    echo "   cd \"$(dirname "$(dirname "$SCRIPT_DIR")")\""
                     echo "3. Run: bash bin/run.sh"
                 else
                     debloat_selection
@@ -2694,6 +2695,7 @@ main() {
                     echo "To run with Administrator privileges:"
                     echo "1. Open a new PowerShell terminal AS ADMINISTRATOR"
                     echo "2. Navigate to the project directory"
+                    echo "   cd \"$(dirname "$(dirname "$SCRIPT_DIR")")\""
                     echo "3. Run: bash bin/run.sh"
                 else
                     setup_power_plan
@@ -2706,6 +2708,7 @@ main() {
                     echo "To run with Administrator privileges:"
                     echo "1. Open a new PowerShell terminal AS ADMINISTRATOR"
                     echo "2. Navigate to the project directory"
+                    echo "   cd \"$(dirname "$(dirname "$SCRIPT_DIR")")\""
                     echo "3. Run: bash bin/run.sh"
                 else
                     install_applications
@@ -2726,6 +2729,7 @@ main() {
                     echo "To run with Administrator privileges:"
                     echo "1. Open a new PowerShell terminal AS ADMINISTRATOR"
                     echo "2. Navigate to the project directory"
+                    echo "   cd \"$(dirname "$(dirname "$SCRIPT_DIR")")\""
                     echo "3. Run: bash bin/run.sh"
                 else
                     configure_system_settings
