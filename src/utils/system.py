@@ -177,7 +177,7 @@ class SystemUtils:
         print()
     
     def print_menu(self, title, options):
-        """Print a formatted centered menu without border"""
+        """Print a formatted menu with left-aligned numbers and padding"""
         # Calculate the width of the longest option
         max_option_length = len(title)
         for key, option in options.items():
@@ -187,23 +187,45 @@ class SystemUtils:
         # Pad to ensure minimum width
         max_option_length = max(max_option_length, 40)
 
-        # Print centered title
-        print(f"{title:^{max_option_length}}")
+        # Print title with padding for alignment
+        print(f"{title:<{max_option_length}}")
         print("-" * max_option_length)
 
-        # Print each option centered
+        # Print each option with left-aligned numbers and padding
         for key, option in options.items():
             option_text = f"[{key}] {option.get('title', 'Unknown')}"
-            print(f"{option_text:^{max_option_length}}")
+            print(f"{option_text:<{max_option_length}}")
 
         print()
     
     def get_menu_choice(self, options):
-        """Get and validate menu choice"""
-        while True:
-            choice = input("Select option by typing the number and pressing Enter: ").strip()
-            if choice in options:
-                return choice
-            else:
-                print("❌ Invalid option. Please try again.")
-                self.pause_execution()
+        """Get and validate menu choice with single key press on Windows or input with Enter on other systems"""
+        import sys
+
+        # Try to use Windows-specific input for single key press
+        try:
+            import msvcrt  # Windows-specific module
+
+            print(f"Select option by pressing the number key: ", end="", flush=True)
+
+            while True:
+                if msvcrt.kbhit():
+                    key = msvcrt.getch().decode('utf-8')
+                    if key in options:
+                        print(key)  # Echo the selected key
+                        return key
+                    elif key.lower() == 'q':  # Allow 'q' to quit
+                        print("\nExiting...")
+                        sys.exit(0)
+                    else:
+                        print(f"\n❌ Invalid option '{key}'. Please try again.")
+                        print(f"Select option by pressing the number key: ", end="", flush=True)
+        except ImportError:
+            # Fallback to regular input for non-Windows systems
+            while True:
+                choice = input("Select option by typing the number and pressing Enter: ").strip()
+                if choice in options:
+                    return choice
+                else:
+                    print("❌ Invalid option. Please try again.")
+                    self.pause_execution()
