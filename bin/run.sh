@@ -354,7 +354,20 @@ SCRIPTEND
         echo "To run with Administrator privileges:"
         echo "1. Open a new PowerShell terminal AS ADMINISTRATOR"
         # Convert Unix path to Windows path for PowerShell
-        windows_path=$(dirname "$(dirname "$SCRIPT_DIR")" | sed -e 's|^/c/|C:\\|' -e 's|/|\\|g')
+        unix_path="$(dirname "$(dirname "$SCRIPT_DIR")")"
+        # Handle common Unix to Windows path conversions
+        if [[ "$unix_path" == /c/* ]]; then
+            windows_path="C:\\${unix_path#/c/}"
+        elif [[ "$unix_path" == /d/* ]]; then
+            windows_path="D:\\${unix_path#/d/}"
+        elif [[ "$unix_path" == /e/* ]]; then
+            windows_path="E:\\${unix_path#/e/}"
+        else
+            # Fallback: just replace forward slashes with backslashes
+            windows_path="${unix_path//\//\\}"
+        fi
+        # Convert any remaining forward slashes to backslashes
+        windows_path="${windows_path//\//\\}"
         echo "2. Navigate to the project directory"
         echo "   cd \"$windows_path\""
         echo "3. Run: bash bin/run.sh"
@@ -678,7 +691,20 @@ SCRIPTEND
         echo "To run with Administrator privileges:"
         echo "1. Open a new PowerShell terminal AS ADMINISTRATOR"
         # Convert Unix path to Windows path for PowerShell
-        windows_path=$(dirname "$(dirname "$SCRIPT_DIR")" | sed -e 's|^/c/|C:\\|' -e 's|/|\\|g')
+        unix_path="$(dirname "$(dirname "$SCRIPT_DIR")")"
+        # Handle common Unix to Windows path conversions
+        if [[ "$unix_path" == /c/* ]]; then
+            windows_path="C:\\${unix_path#/c/}"
+        elif [[ "$unix_path" == /d/* ]]; then
+            windows_path="D:\\${unix_path#/d/}"
+        elif [[ "$unix_path" == /e/* ]]; then
+            windows_path="E:\\${unix_path#/e/}"
+        else
+            # Fallback: just replace forward slashes with backslashes
+            windows_path="${unix_path//\//\\}"
+        fi
+        # Convert any remaining forward slashes to backslashes
+        windows_path="${windows_path//\//\\}"
         echo "2. Navigate to the project directory"
         echo "   cd \"$windows_path\""
         echo "3. Run: bash bin/run.sh"
@@ -1230,7 +1256,20 @@ SCRIPTEND
         echo "To run with Administrator privileges:"
         echo "1. Open a new PowerShell terminal AS ADMINISTRATOR"
         # Convert Unix path to Windows path for PowerShell
-        windows_path=$(dirname "$(dirname "$SCRIPT_DIR")" | sed -e 's|^/c/|C:\\|' -e 's|/|\\|g')
+        unix_path="$(dirname "$(dirname "$SCRIPT_DIR")")"
+        # Handle common Unix to Windows path conversions
+        if [[ "$unix_path" == /c/* ]]; then
+            windows_path="C:\\${unix_path#/c/}"
+        elif [[ "$unix_path" == /d/* ]]; then
+            windows_path="D:\\${unix_path#/d/}"
+        elif [[ "$unix_path" == /e/* ]]; then
+            windows_path="E:\\${unix_path#/e/}"
+        else
+            # Fallback: just replace forward slashes with backslashes
+            windows_path="${unix_path//\//\\}"
+        fi
+        # Convert any remaining forward slashes to backslashes
+        windows_path="${windows_path//\//\\}"
         echo "2. Navigate to the project directory"
         echo "   cd \"$windows_path\""
         echo "3. Run: bash bin/run.sh"
@@ -2564,7 +2603,20 @@ SCRIPTEND
         echo "To run with Administrator privileges:"
         echo "1. Open a new PowerShell terminal AS ADMINISTRATOR"
         # Convert Unix path to Windows path for PowerShell
-        windows_path=$(dirname "$(dirname "$SCRIPT_DIR")" | sed -e 's|^/c/|C:\\|' -e 's|/|\\|g')
+        unix_path="$(dirname "$(dirname "$SCRIPT_DIR")")"
+        # Handle common Unix to Windows path conversions
+        if [[ "$unix_path" == /c/* ]]; then
+            windows_path="C:\\${unix_path#/c/}"
+        elif [[ "$unix_path" == /d/* ]]; then
+            windows_path="D:\\${unix_path#/d/}"
+        elif [[ "$unix_path" == /e/* ]]; then
+            windows_path="E:\\${unix_path#/e/}"
+        else
+            # Fallback: just replace forward slashes with backslashes
+            windows_path="${unix_path//\//\\}"
+        fi
+        # Convert any remaining forward slashes to backslashes
+        windows_path="${windows_path//\//\\}"
         echo "2. Navigate to the project directory"
         echo "   cd \"$windows_path\""
         echo "3. Run: bash bin/run.sh"
@@ -2632,7 +2684,20 @@ run_all_phases() {
         echo "To run with Administrator privileges:"
         echo "1. Open a new PowerShell terminal AS ADMINISTRATOR"
         # Convert Unix path to Windows path for PowerShell
-        windows_path=$(dirname "$(dirname "$SCRIPT_DIR")" | sed -e 's|^/c/|C:\\|' -e 's|/|\\|g')
+        unix_path="$(dirname "$(dirname "$SCRIPT_DIR")")"
+        # Handle common Unix to Windows path conversions
+        if [[ "$unix_path" == /c/* ]]; then
+            windows_path="C:\\${unix_path#/c/}"
+        elif [[ "$unix_path" == /d/* ]]; then
+            windows_path="D:\\${unix_path#/d/}"
+        elif [[ "$unix_path" == /e/* ]]; then
+            windows_path="E:\\${unix_path#/e/}"
+        else
+            # Fallback: just replace forward slashes with backslashes
+            windows_path="${unix_path//\//\\}"
+        fi
+        # Convert any remaining forward slashes to backslashes
+        windows_path="${windows_path//\//\\}"
         echo "2. Navigate to the project directory"
         echo "   cd \"$windows_path\""
         echo "3. Run: bash bin/run.sh"
@@ -2646,7 +2711,20 @@ run_all_phases() {
         echo "To run with Administrator privileges:"
         echo "1. Open a new PowerShell terminal AS ADMINISTRATOR"
         # Convert Unix path to Windows path for PowerShell
-        windows_path=$(dirname "$(dirname "$SCRIPT_DIR")" | sed -e 's|^/c/|C:\\|' -e 's|/|\\|g')
+        unix_path="$(dirname "$(dirname "$SCRIPT_DIR")")"
+        # Handle common Unix to Windows path conversions
+        if [[ "$unix_path" == /c/* ]]; then
+            windows_path="C:\\${unix_path#/c/}"
+        elif [[ "$unix_path" == /d/* ]]; then
+            windows_path="D:\\${unix_path#/d/}"
+        elif [[ "$unix_path" == /e/* ]]; then
+            windows_path="E:\\${unix_path#/e/}"
+        else
+            # Fallback: just replace forward slashes with backslashes
+            windows_path="${unix_path//\//\\}"
+        fi
+        # Convert any remaining forward slashes to backslashes
+        windows_path="${windows_path//\//\\}"
         echo "2. Navigate to the project directory"
         echo "   cd \"$windows_path\""
         echo "3. Run: bash bin/run.sh"
@@ -2660,7 +2738,20 @@ run_all_phases() {
         echo "To run with Administrator privileges:"
         echo "1. Open a new PowerShell terminal AS ADMINISTRATOR"
         # Convert Unix path to Windows path for PowerShell
-        windows_path=$(dirname "$(dirname "$SCRIPT_DIR")" | sed -e 's|^/c/|C:\\|' -e 's|/|\\|g')
+        unix_path="$(dirname "$(dirname "$SCRIPT_DIR")")"
+        # Handle common Unix to Windows path conversions
+        if [[ "$unix_path" == /c/* ]]; then
+            windows_path="C:\\${unix_path#/c/}"
+        elif [[ "$unix_path" == /d/* ]]; then
+            windows_path="D:\\${unix_path#/d/}"
+        elif [[ "$unix_path" == /e/* ]]; then
+            windows_path="E:\\${unix_path#/e/}"
+        else
+            # Fallback: just replace forward slashes with backslashes
+            windows_path="${unix_path//\//\\}"
+        fi
+        # Convert any remaining forward slashes to backslashes
+        windows_path="${windows_path//\//\\}"
         echo "2. Navigate to the project directory"
         echo "   cd \"$windows_path\""
         echo "3. Run: bash bin/run.sh"
@@ -2680,7 +2771,20 @@ run_all_phases() {
         echo "To run with Administrator privileges:"
         echo "1. Open a new PowerShell terminal AS ADMINISTRATOR"
         # Convert Unix path to Windows path for PowerShell
-        windows_path=$(dirname "$(dirname "$SCRIPT_DIR")" | sed -e 's|^/c/|C:\\|' -e 's|/|\\|g')
+        unix_path="$(dirname "$(dirname "$SCRIPT_DIR")")"
+        # Handle common Unix to Windows path conversions
+        if [[ "$unix_path" == /c/* ]]; then
+            windows_path="C:\\${unix_path#/c/}"
+        elif [[ "$unix_path" == /d/* ]]; then
+            windows_path="D:\\${unix_path#/d/}"
+        elif [[ "$unix_path" == /e/* ]]; then
+            windows_path="E:\\${unix_path#/e/}"
+        else
+            # Fallback: just replace forward slashes with backslashes
+            windows_path="${unix_path//\//\\}"
+        fi
+        # Convert any remaining forward slashes to backslashes
+        windows_path="${windows_path//\//\\}"
         echo "2. Navigate to the project directory"
         echo "   cd \"$windows_path\""
         echo "3. Run: bash bin/run.sh"
